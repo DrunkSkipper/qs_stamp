@@ -3,11 +3,12 @@ import ctypes
 import hashlib
 import sys
 import copy
+import datetime
 
 def generateHeader(nums):
     result=""
     for i in nums:
-        result+=str(nums)+"=";
+        result+=str(i)+"="
     result=result[:-1]
     return hashlib.sha256(result.encode()).hexdigest()
 
@@ -20,6 +21,7 @@ def generateStamp(iterations, size, edgePercentage, shift, header):
     edgePercentage = int(edgePercentage)
     size = int(size)
     while curIter<iterations:
+        print(curIter)
         qh = QuickSandHeader(header,shift)
         solved = qs.solve(qh)
         if len(solved) == size:
@@ -52,6 +54,7 @@ class QuickSandHeader:
         hash_buff = hashlib.sha256(header.encode()).digest()
         res = int.from_bytes(hash_buff[:8:],'little')
         res2 = int.from_bytes(hash_buff[8:16:],'little')
+        self.data.clear()
         self.data.append(ctypes.c_uint64(res^0x736f6d6670736575))
         self.data.append(ctypes.c_uint64(res2^0x646f72616e646f6d))
         self.data.append(ctypes.c_uint64(res^0x6c7967656e657261))
@@ -209,5 +212,7 @@ if len(sys.argv)==1:
 if len(sys.argv) != 6:
     print("Wrong number of parameters.\n")
     exit(1)
+start = datetime.datetime.now()
 print(generateStamp(sys.argv[1],sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5]))
+print ("Finished in " + str(datetime.datetime.now()-start))
 exit(0)
