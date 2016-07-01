@@ -37,7 +37,7 @@ def generateStamp(iterations, size, edgePercentage, shift, header):
             if j!=len(result[i])-1:
                 resString+=","
         if i!=len(result)-1:
-            res+="|"
+            resString+="|"
     return resString
 
 
