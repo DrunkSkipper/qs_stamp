@@ -32,7 +32,7 @@ def generateStamp(iterations, size, edgePercentage, shift, header):
         curIter+=1
     resString=""
     for i in range(len(result)):
-        for j in range(len(result[j])):
+        for j in range(len(result[i])):
             resString+=result[i][j]
             if j!=len(result[i])-1:
                 resString+=","
