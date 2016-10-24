@@ -4,10 +4,10 @@ quicksand:  quicksand.o main.o
 	g++ -I. main.o quicksand.o -o quicksand $(LDFLAGS)
 
 main.cpp:
-	g++ $(CXX_FLAGS) main.cpp -o main.o
+	g++ $(CXXFLAGS) main.cpp -o main.o
 
 quicksand.cpp:
-	g++ $(CXX_FLAGS) quicksand.cpp -o quicksand.o
+	g++ $(CXXFLAGS) quicksand.cpp -o quicksand.o
 
 
 clean:
